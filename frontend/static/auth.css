@@ -1,0 +1,221 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background: #202123;
+}
+
+.login-container, .register-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card, .register-card {
+    background-color: #202123 !important;
+    border: 1px solid #4a4b53 !important;
+    border-radius: 8px !important;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header, .register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header img, .register-header img {
+    width: 70px;
+    height: 70px;
+    border: 1.5px solid #f5f6fa;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.login-header h4, .register-header h4 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.login-header p, .register-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+}
+
+.form-control {
+    background-color: #40414f !important;
+    border: 1px solid #4a4b53 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    height: 45px !important;
+    margin-bottom: 1rem;
+}
+
+.btn-login, .btn-register {
+    background-color: #444654 !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 8px !important;
+    height: 45px !important;
+    width: 100%;
+}
+
+.btn-login:hover, .btn-register:hover {
+    background-color: #535561 !important;
+}
+
+.register-link, .login-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.register-link a, .login-link a {
+    color: #acacbe;
+    text-decoration: none;
+}
+
+.register-link a:hover, .login-link a:hover {
+    color: white;
+}
+
+.form-label {
+    color: white !important;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    color: white !important;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: none;
+}
+
+.alert {
+    background-color: #40414f !important;
+    border-color: #ff4444 !important;
+    color: #ff4444 !important;
+    margin-bottom: 1.5rem;
+}
+
+.mypage-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mypage-card {
+    background-color: #202123 !important;
+    border: 1px solid #4a4b53 !important;
+    border-radius: 8px !important;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.mypage-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.mypage-header img.profile-img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #f5f6fa;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.mypage-header h4 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.mypage-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+}
+
+.user-info {
+    background-color: #40414f;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-group {
+    margin-bottom: 1rem;
+}
+
+.info-group:last-child {
+    margin-bottom: 0;
+}
+
+.info-group label {
+    color: #acacbe;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.info-group p {
+    color: white;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.btn-edit, .btn-back {
+    background-color: #40414f !important;
+    border: 1px solid #4a4b53 !important;
+    color: #acacbe !important;
+    padding: 0.8rem !important;
+    border-radius: 8px !important;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-edit:hover, .btn-back:hover {
+    background-color: #535561 !important;
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-back {
+    margin-top: 0.5rem;
+}
+
+.fas {
+    margin-right: 0.5rem;
+}
+
+.disabled-input {
+    background-color: #2d2d3b !important;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.form-text.text-muted {
+    color: #acacbe !important;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+} 
