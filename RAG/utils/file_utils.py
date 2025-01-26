@@ -22,9 +22,3 @@ def format_docs(docs):
     print("Formatted Documents (Contexts):")
     print(formatted)  # 포맷팅된 컨텍스트 출력
     return formatted
-
-def llm_init():
-    return ChatOpenAI(
-    model="gpt-4o-mini-2024-07-18",
-    temperature=0,
-    )

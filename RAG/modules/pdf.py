@@ -1,47 +1,63 @@
 import os
 import glob
-from modules.extractor import extract_tables_with_camelot, extract_text_with_pdfplumber
-# PDF에서 텍스트와 표 추출 함수
-def extract_pdf_data(pdf_path):
+import pymupdf4llm
+from langchain.text_splitter import MarkdownTextSplitter
+
+# PDF를 Markdown으로 변환하고 청크로 나누는 함수
+def process_pdf_to_chunks(pdf_path, chunk_size, chunk_overlap):
     """
-    PDF에서 텍스트는 pdfplumber, 표는 camelot으로 추출하여 통합
+    PDF 파일을 PyMuPDF4LLM을 사용해 Markdown으로 변환하고,
+    MarkdownTextSplitter로 청크로 나눔.
     """
-    texts = extract_text_with_pdfplumber(pdf_path)
-    tables = extract_tables_with_camelot(pdf_path)
-    return {'texts': texts, 'tables': tables, 'filename': os.path.basename(pdf_path)}
+    try:
+        # PDF를 Markdown으로 변환
+        md_text = pymupdf4llm.to_markdown(pdf_path)
+
+        # MarkdownTextSplitter 초기화
+        splitter = MarkdownTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+
+        # Markdown을 청크로 나누기
+        documents = splitter.create_documents([md_text])
+        return [doc.page_content for doc in documents]  # 청크 텍스트만 반환
+    except Exception as e:
+        print(f"오류 발생: {e}")
+        return []
 
 # 디렉토리 내 PDF 파일 처리 함수
-def process_multiple_pdfs(directory_path):
+def process_pdfs_in_directory(input_dir, chunk_size, chunk_overlap):
     """
-    디렉토리 내 모든 PDF 파일을 처리하는 함수
+    디렉토리 내 모든 PDF 파일을 처리하여 청크 데이터를 생성
     """
-    pdf_files = glob.glob(os.path.join(directory_path, "*.pdf"))
+    pdf_files = glob.glob(os.path.join(input_dir, "*.pdf"))
     if not pdf_files:
-        print(f"경고: {directory_path} 경로에서 PDF 파일을 찾을 수 없습니다.")
+        print(f"경고: {input_dir} 경로에서 PDF 파일을 찾을 수 없습니다.")
         return []
-        
+
     print(f"\n=== 총 {len(pdf_files)}개의 PDF 파일 처리 시작 ===")
-    all_results = []
-    
-    for i, pdf_file in enumerate(pdf_files, 1):
-        filename = os.path.basename(pdf_file)
-        print(f"\n[{i}/{len(pdf_files)}] 처리 중: {filename}")
-        
+    all_chunks = []
+
+    for i, pdf_file in enumerate(pdf_files, start=1):
+        print(f"\n[{i}/{len(pdf_files)}] 처리 중: {os.path.basename(pdf_file)}")
         try:
-            result = extract_pdf_data(pdf_file)
-            all_results.append(result)
-            
-            print(f"- 추출된 표 개수: {len(result['tables'])}")
-            print(f"- 추출된 텍스트 조각 수: {len(result['texts'])}")
-            
-            # 첫 번째 표 미리보기
-            if result['tables']:
-                print("\n첫 번째 표 미리보기:")
-                print(result['tables'][0]['data'].head())
-            
+            # PDF 처리 및 청크 생성
+            chunks = process_pdf_to_chunks(pdf_file, chunk_size, chunk_overlap)
+            all_chunks.extend(chunks)
+            print(f"- 생성된 청크 수: {len(chunks)}")
         except Exception as e:
-            print(f"!!! {filename} 처리 중 오류 발생: {str(e)}")
-            continue
-            
-    print(f"\n=== 총 {len(all_results)}/{len(pdf_files)} 개의 PDF 처리 완료 ===")
-    return all_results
+            print(f"!!! {pdf_file} 처리 중 오류 발생: {e}")
+    
+    print(f"\n=== 총 {len(pdf_files)}개의 PDF 처리 완료 ===")
+    return all_chunks
+
+
+'''
+# 결과 저장 함수
+def save_chunks_to_file(chunks, output_file):
+    """
+    생성된 청크를 텍스트 파일로 저장
+    """
+    with open(output_file, "w", encoding="utf-8") as f:
+        for chunk in chunks:
+            f.write(chunk + "\n\n")
+
+'''

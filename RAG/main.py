@@ -1,5 +1,4 @@
-from modules.pdf import process_multiple_pdfs
-from modules.context import create_context_with_tables_optimized,split_contexts_optimized,save_results_to_excel
+from modules.pdf import process_pdfs_in_directory
 from modules.cluster import perform_clustering
 from utils.file_utils import format_docs,fmt_txt
 from typing import Dict, List, Tuple
@@ -22,15 +21,13 @@ import os
 import warnings
 
 PDF_DIR="/data/ephemeral/home/dataset/SKHynix"
-OUTPUT_DIR="/data/ephemeral/home/RAG/extracted_data"
 MODEL_NAME="gpt-4o-mini-2024-07-18"
-CACHE_DIR= "/data/ephemeral/home/RAG/cache"
+CACHE_DIR= "/data/ephemeral/home/level4-cv-finalproject-hackathon-cv-23-lv3/RAG/cache"
 DB_INDEX = "RAPTOR_CLAUDE"
 DOTENV_PATH="/data/ephemeral/home/.env"
 PROJECT_NAME="hackathon-module"
 
 
-# API 키를 환경변수로 관리하기 위한 설정 파일 (main.py)
 
 
 # 경고 메시지 무시
@@ -43,21 +40,14 @@ load_dotenv(dotenv_path=DOTENV_PATH)
 logging.langsmith(PROJECT_NAME)
 
 
-pdf_directory = PDF_DIR
-output_dir = OUTPUT_DIR
+pdf_directory = PDF_DIR # 데이터 위치 
 
-# PDF 처리 및 저장
-results = process_multiple_pdfs(pdf_directory)
-contexts = create_context_with_tables_optimized(results)
-texts_split = split_contexts_optimized(contexts, chunk_size=2000, chunk_overlap=200)
-save_results_to_excel(results, texts_split, output_dir)
+# PDF 처리 및 청크 생성
+texts_split = process_pdfs_in_directory(pdf_directory, chunk_size=4000, chunk_overlap=500)
 
-print(f"생성된 청크 수: {len(texts_split)}")
-print(f"첫 번째 청크 예시:\n{texts_split[0][:500]}...")
 
 
 # 모델 임베딩을 캐시 저장소에 연결 
-
 
 # cache 저장 경로 지정
 store = LocalFileStore(CACHE_DIR)
@@ -70,8 +60,6 @@ cached_embeddings = CacheBackedEmbeddings.from_bytes_store(
     embeddings, store, namespace=embeddings.model
 )
 
-
-# 모델 초기화 
 
 # llm 모델 초기화
 llm = ChatOpenAI(
@@ -248,9 +236,7 @@ else:
 
 
 # retriever 생성 (main)
-retriever = vectorstore.as_retriever()
-
-# prompt or main..? 
+retriever = vectorstore.as_retriever(search_kwargs={"k": 10})
 
 
 # 프롬프트 정의
@@ -265,22 +251,23 @@ Ensure your response is concise and directly addresses the question without any 
 Your final answer should be written concisely (but include important numerical values, technical terms, jargon, and names).
 
 # Steps
-1. Analyze the user's question to identify the specific financial term(s) being referenced.
+
+1. Carefully read and understand the context provided.
+2. Identify the key information related to the question within the context.
+3. Analyze the user's question to identify the specific financial term(s) being referenced.
         - Example financial terms include: "세전", "세후", "계속사업이익", "사업이익".
         - Pay attention to whether the question includes specific terms like "세전", "세후", or "계속사업이익".
-2. Carefully read and understand the context provided.
-3. Identify the key information related to the question within the context.
-4. Formulate a concise answer based on the relevant information.
-5. Ensure your final answer directly addresses the question.
-6. You must refer to the table carefully.
-7. If asked by period, answer by period and then give the total at the end.
-8. Be sure to organize it clearly, don't write it at length.
-9. If there is a word referring to a period in the question, you should carefully refer to the table for the corresponding period.
-10. Identify if the question explicitly mentions periods (e.g., quarterly, yearly).
+4. Identify if the question explicitly mentions periods (e.g., quarterly, yearly).
         - If the question mentions "quarters" or "specific periods," prioritize analyzing the quarterly table.
         - If no period is specified, provide an overview but ensure quarterly data is referenced when applicable.
-12. If a specific period comes up, you have to search and answer even if you change it to a quarter.
-13. You should include numerical values in your answer.
+5. Formulate a concise answer based on the relevant information.
+6. Ensure your final answer directly addresses the question.
+7. You must refer to the table carefully.
+8. If asked by period, answer by period and then give the total at the end.
+9. Be sure to organize it clearly, don't write it at length.
+10. If there is a word referring to a period in the question, you should carefully refer to the table for the corresponding period.
+11. If a specific period comes up, you have to search and answer even if you change it to a quarter.
+12. You should include numerical values in your answer.
 
 # Output Format:
 [General introduction of the answer]
@@ -307,7 +294,6 @@ Remember:
 
 # Your final ANSWER to the user's QUESTION:"""
 )
-
 
 # RAG 체인 정의
 rag_chain = (
