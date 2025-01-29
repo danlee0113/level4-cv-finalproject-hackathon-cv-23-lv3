@@ -30,7 +30,7 @@ llm = ChatOpenAI(
     temperature=0,
 )
 
-## main.py와 embeddings.py에 필요한 llm, embeddings 변수를 pickle file로 저장. 
+## main.py와 embeddings.py에 필요한 llm, embeddings 변수를 json file로 저장. 
 
 # Embeddings와 LLM의 설정 정보 저장
 embeddings_info = {

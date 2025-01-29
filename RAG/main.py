@@ -14,7 +14,7 @@ import os
 import warnings
 
 PDF_DIR="/data/ephemeral/home/dataset/SKHynix"
-DB_INDEX = "RAPTOR_CLAUDE"
+DB_INDEX = "RAPTOR_CLAUDE_1"
 DOTENV_PATH="/data/ephemeral/home/.env"
 PROJECT_NAME="hackathon-module"
 
@@ -72,7 +72,7 @@ if os.path.exists(DB_INDEX):
     local_index = FAISS.load_local(
     DB_INDEX, 
     embeddings,
-    allow_dangerous_deserialization=True # 주의! load 하는 파일이 신뢰 가능할 때에만 True로 설정해해야 함. 
+    #allow_dangerous_deserialization=True # 주의! load 하는 파일이 신뢰 가능할 때에만 True로 설정해해야 함. 
     )
     local_index.merge_from(vectorstore)
     local_index.save_local(DB_INDEX)
