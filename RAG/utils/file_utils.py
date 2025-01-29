@@ -16,7 +16,6 @@ def fmt_txt(df: pd.DataFrame) -> str:
     unique_txt = df["text"].tolist()
     return "--- --- \n --- --- ".join(unique_txt)
 
-
 def format_docs(docs):
     formatted = "\n\n".join(f"<document>{doc.page_content}</document>" for doc in docs)
     print("Formatted Documents (Contexts):")
