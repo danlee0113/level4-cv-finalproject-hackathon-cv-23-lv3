@@ -4,7 +4,6 @@ from langchain.storage import LocalFileStore
 from langchain_openai import ChatOpenAI
 
 
-import pickle
 
 CACHE_DIR= "/data/ephemeral/home/level4-cv-finalproject-hackathon-cv-23-lv3/RAG/cache"
 MODEL_NAME="gpt-4o-mini-2024-07-18"

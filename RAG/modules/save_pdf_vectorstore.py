@@ -39,17 +39,17 @@ for level in sorted(results.keys()):
 # 이제 all_texts를 사용하여 FAISS vectorstore를 구축합니다.
 
 
-# 1️⃣ FAISS 초기화 (첫 번째 배치를 이용)
+# FAISS 초기화 (첫 번째 배치를 이용)
 first_batch_texts = all_texts[:BATCH_SIZE]
 first_batch_embeddings = embeddings.embed_documents(first_batch_texts)
 vectorstore = FAISS.from_texts(texts=first_batch_texts, embedding=embeddings)
 
-# 2️⃣ 나머지 데이터 배치로 추가
+# 나머지 데이터 배치로 추가
 for i in range(BATCH_SIZE, len(all_texts), BATCH_SIZE):
     batch_texts = all_texts[i:i + BATCH_SIZE]
     batch_embeddings = embeddings.embed_documents(batch_texts)
     vectorstore.add_texts(texts=batch_texts, embeddings=batch_embeddings)
-    time.sleep(1)  # 🌟 API Rate Limit을 피하기 위해 1초 대기
+    time.sleep(1)  # API Rate Limit을 피하기 위해 1초 대기
 
-# 3️⃣ 벡터스토어 저장
+# 벡터스토어 저장
 vectorstore.save_local(folder_path=DB_INDEX)
