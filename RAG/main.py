@@ -116,7 +116,6 @@ rag_chain = (
 )
 
 
-query="SK하이닉스는 HBM CAPA가 거의 다 Sold Out된 상황에서, 2025년 추가적인 수요에 어떻게 대응할 계획인가요?"
 
 def query_to_answer(query,rag_chain):
     '''
@@ -128,6 +127,13 @@ def query_to_answer(query,rag_chain):
     stream_response(answer)
     return stream_response(answer)
 
+query = ""
+while True:
+    query = input("질문 입력 : ")  # 사용자가 질문 입력
 
+    if query == "Done.":  # "Done." 입력 시 바로 종료
+        print("챗봇 종료!")
+        break
 
-query_to_answer(query, rag_chain)
+    query_to_answer(query, rag_chain)  # 질문 실행
+    print()  # 줄바꿈 추가
