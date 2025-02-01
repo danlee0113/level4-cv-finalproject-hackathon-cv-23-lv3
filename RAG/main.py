@@ -1,16 +1,14 @@
-from modules.pdf import process_pdfs_in_directory
 from utils.file_utils import format_docs
-from modules.embeddings import recursive_embed_cluster_summarize, load_json
+from modules.embeddings import load_json
 from langchain_teddynote.messages import stream_response
-from langchain_openai import ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_teddynote import logging
 from dotenv import load_dotenv
-
-import os
+import faiss
+import pickle
 import warnings
 
 PDF_DIR="/data/ephemeral/home/dataset/SKHynix"
@@ -24,7 +22,7 @@ EMBEDDING_INFO_DIR="/data/ephemeral/home/level4-cv-finalproject-hackathon-cv-23-
 embeddings, llm=load_json(EMBEDDING_INFO_DIR, LLM_INFO_DIR)
 
 
-query="SK하이닉스는 HBM CAPA가 거의 다 Sold Out된 상황에서, 2025년 추가적인 수요에 어떻게 대응할 계획인가요?"
+
 
 # 경고 메시지 무시
 warnings.filterwarnings("ignore")
@@ -36,48 +34,17 @@ load_dotenv(dotenv_path=DOTENV_PATH)
 logging.langsmith(PROJECT_NAME)
 
 
-pdf_directory = PDF_DIR # 데이터 위치 
+# FAISS 인덱스 로드
+index = faiss.read_index(f"{DB_INDEX}/index.faiss")
 
-# PDF 처리 및 청크 생성
-texts_split = process_pdfs_in_directory(pdf_directory, chunk_size=4000, chunk_overlap=500)
+# FAISS 저장된 메타데이터 로드
+with open(f"{DB_INDEX}/index.pkl", "rb") as f:
+    metadata = pickle.load(f)
 
+docstore, index_to_docstore_id = metadata
+# FAISS 벡터스토어 재구성 (올바른 방식)
+vectorstore = FAISS(embedding_function=embeddings, index=index, docstore=docstore, index_to_docstore_id=index_to_docstore_id)
 
-
-# 트리 구축 (main)
-leaf_texts = texts_split.copy()
-
-# 재귀적으로 임베딩, 클러스터링 및 요약을 수행하여 결과를 얻음
-results = recursive_embed_cluster_summarize(leaf_texts, level=1, n_levels=3)
-
-
-# DB, VectorStore
-
-all_texts = leaf_texts.copy()
-
-# 레벨을 정렬하여 순회
-for level in sorted(results.keys()):
-    # 현재 레벨의 DataFrame에서 요약을 추출
-    summaries = results[level][1]["summaries"].tolist()
-    # 현재 레벨의 요약을 all_texts에 추가합니다.
-    all_texts.extend(summaries)
-
-# 이제 all_texts를 사용하여 FAISS vectorstore를 구축합니다.
-vectorstore = FAISS.from_texts(texts=all_texts, embedding=embeddings)
-
-
-
-
-# 기존 DB 인덱스가 존재하면 로드하여 vectorstore와 병합한 후 저장합니다.
-if os.path.exists(DB_INDEX):
-    local_index = FAISS.load_local(
-    DB_INDEX, 
-    embeddings,
-    #allow_dangerous_deserialization=True # 주의! load 하는 파일이 신뢰 가능할 때에만 True로 설정해해야 함. 
-    )
-    local_index.merge_from(vectorstore)
-    local_index.save_local(DB_INDEX)
-else:
-    vectorstore.save_local(folder_path=DB_INDEX)
 
 
 # retriever 생성 (main)
@@ -149,6 +116,7 @@ rag_chain = (
 )
 
 
+query="SK하이닉스는 HBM CAPA가 거의 다 Sold Out된 상황에서, 2025년 추가적인 수요에 어떻게 대응할 계획인가요?"
 
 def query_to_answer(query,rag_chain):
     '''
@@ -159,5 +127,7 @@ def query_to_answer(query,rag_chain):
     answer = rag_chain.stream(query)
     stream_response(answer)
     return stream_response(answer)
+
+
 
 query_to_answer(query, rag_chain)

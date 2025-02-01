@@ -8,15 +8,14 @@ import pickle
 
 CACHE_DIR= "/data/ephemeral/home/level4-cv-finalproject-hackathon-cv-23-lv3/RAG/cache"
 MODEL_NAME="gpt-4o-mini-2024-07-18"
-LLM_PICKLE_DIR="/data/ephemeral/home/pickles/llm.pkl" # pickle 파일이 저장될 경로 (github에 올라가면 안됨.)
-EMBEDDING_PICKLE_DIR="/data/ephemeral/home/pickles/embeddings.pkl" 
+ 
 
 
 
 store = LocalFileStore(CACHE_DIR)
 
 # embeddings 인스턴스를 생성
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small", disallowed_special=())
+embeddings = OpenAIEmbeddings(model="text-embedding-3-large", disallowed_special=())
 
 # CacheBackedEmbeddings 인스턴스를 생성
 cached_embeddings = CacheBackedEmbeddings.from_bytes_store(
@@ -34,7 +33,7 @@ llm = ChatOpenAI(
 
 # Embeddings와 LLM의 설정 정보 저장
 embeddings_info = {
-    "model": "text-embedding-3-small",
+    "model": "text-embedding-3-large",
     "namespace": "some_namespace",  # 필요한 추가 정보 포함
 }
 
