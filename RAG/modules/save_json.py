@@ -14,7 +14,7 @@ MODEL_NAME="gpt-4o-mini-2024-07-18"
 store = LocalFileStore(CACHE_DIR)
 
 # embeddings 인스턴스를 생성
-embeddings = OpenAIEmbeddings(model="text-embedding-3-large", disallowed_special=())
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small", disallowed_special=())
 
 # CacheBackedEmbeddings 인스턴스를 생성
 cached_embeddings = CacheBackedEmbeddings.from_bytes_store(
@@ -32,7 +32,7 @@ llm = ChatOpenAI(
 
 # Embeddings와 LLM의 설정 정보 저장
 embeddings_info = {
-    "model": "text-embedding-3-large",
+    "model": "text-embedding-3-small",
     "namespace": "some_namespace",  # 필요한 추가 정보 포함
 }
 

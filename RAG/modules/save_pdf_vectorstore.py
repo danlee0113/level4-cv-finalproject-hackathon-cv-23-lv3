@@ -5,7 +5,7 @@ from langchain_community.vectorstores import FAISS
 import time 
 
 PDF_DIR="/data/ephemeral/home/dataset/"
-DB_INDEX = "RAPTOR_CLAUDE_1" 
+DB_INDEX = "RAPTOR_CLAUDE_1_3500_400" 
 pdf_directory = PDF_DIR # 데이터 위치 
 LLM_INFO_DIR="/data/ephemeral/home/level4-cv-finalproject-hackathon-cv-23-lv3/RAG/json_cache/llm_info.json"
 EMBEDDING_INFO_DIR="/data/ephemeral/home/level4-cv-finalproject-hackathon-cv-23-lv3/RAG/json_cache/embeddings_info.json"
@@ -17,7 +17,7 @@ embeddings, llm=load_json(EMBEDDING_INFO_DIR, LLM_INFO_DIR)
 
 
 # PDF 처리 및 청크 생성
-texts_split = process_pdfs_in_directory(pdf_directory, chunk_size=4000, chunk_overlap=500)
+texts_split = process_pdfs_in_directory(pdf_directory, chunk_size=3500, chunk_overlap=400)
 
 # 트리 구축 (main)
 leaf_texts = texts_split.copy()

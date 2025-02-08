@@ -50,14 +50,3 @@ def process_pdfs_in_directory(input_dir, chunk_size, chunk_overlap):
     return all_chunks
 
 
-'''
-# 결과 저장 함수
-def save_chunks_to_file(chunks, output_file):
-    """
-    생성된 청크를 텍스트 파일로 저장
-    """
-    with open(output_file, "w", encoding="utf-8") as f:
-        for chunk in chunks:
-            f.write(chunk + "\n\n")
-
-'''
