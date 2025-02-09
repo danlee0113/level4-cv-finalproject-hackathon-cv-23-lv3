@@ -1,0 +1,26 @@
+FROM mysql:8.0
+
+RUN microdnf update && microdnf install -y ncurses
+
+# MySQL 설정 파일 생성
+RUN echo '[mysqld]' > /etc/my.cnf \
+    && echo 'character-set-server=utf8mb4' >> /etc/my.cnf \
+    && echo 'collation-server=utf8mb4_unicode_ci' >> /etc/my.cnf \
+    && echo 'init-connect="SET NAMES utf8mb4"' >> /etc/my.cnf \
+    && echo 'skip-character-set-client-handshake' >> /etc/my.cnf \
+    && echo '' >> /etc/my.cnf \
+    && echo '[client]' >> /etc/my.cnf \
+    && echo 'default-character-set=utf8mb4' >> /etc/my.cnf \
+    && echo '' >> /etc/my.cnf \
+    && echo '[mysql]' >> /etc/my.cnf \
+    && echo 'default-character-set=utf8mb4' >> /etc/my.cnf \
+    && echo '' >> /etc/my.cnf \
+    && echo '[mysqldump]' >> /etc/my.cnf \
+    && echo 'default-character-set=utf8mb4' >> /etc/my.cnf
+
+# 기본 MySQL 설정 파일 심볼릭 링크 생성
+RUN ln -sf /etc/my.cnf /etc/mysql/my.cnf
+
+COPY init.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306

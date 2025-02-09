@@ -1,0 +1,8 @@
+FROM python:3.11.11
+
+WORKDIR /workspace/fastapi-server
+
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y netcat-openbsd
+ENV PYTHONPATH=/workspace/fastapi-server

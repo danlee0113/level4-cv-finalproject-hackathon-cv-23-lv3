@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReportRadar</title>
+
+    <!-- CSS -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link rel="stylesheet" href="{{ request.url_for('static', path='sidebar.css') }}">
+    <link rel="stylesheet" href="{{ request.url_for('static', path='style.css') }}">
+    <link rel="stylesheet" href="{{ request.url_for('static', path='news.css') }}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  </head>
+
+  <body id="body-pd">
+    <div class="l-navbar" id="navbar">
+      <nav class="nav">
+        <div>
+          <div class="nav__brand">
+            <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+            <div class="nav__logo">ReportRadar</div>
+          </div>
+          <div class="nav__list">
+            <a href="{{ request.url_for('show_user_chats') }}" class="nav__link">
+              <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+              <span class="nav_name">새 채팅</span>
+            </a>
+            
+            <a href="{{ request.url_for('news') }}" class="nav__link">
+                <ion-icon name="newspaper-outline" class="nav__icon"></ion-icon>
+                <span class="nav_name">뉴스 요약</span>
+              </a>
+  
+            <div class="nav__recent">
+              <span class="nav_name nav_recent_title">최신</span>
+            </div>
+
+            <!-- 세션 목록 (최신 위) -->
+            <div class="sessions-container">
+              <ul class="sessions-list" id="sessionList">
+                {% for session in chat_sessions %}
+                  <li class="session-item">
+                    <button class="session-button" data-session-id="{{ session.chat_session_id }}">
+                      <i class="far fa-comment-alt nav__icon"></i>
+                      {% if session.first_message %}
+                        {{ session.first_message[:10] }}{{ '...' if session.first_message|length > 10 else '' }}
+                      {% else %}
+                        새로운 채팅
+                      {% endif %}
+                    </button>                    
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container-fluid h-100">
+      <div class="chat card h-100">
+        <div class="card-header msg_head d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">ReportRadar News</h4>
+          <div class="user-profile dropdown">
+            <div class="icon-container" data-toggle="dropdown">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="{{ request.url_for('mypage') }}">
+                <i class="fas fa-user mr-2"></i>마이페이지
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ request.url_for('logout') }}">
+                <i class="fas fa-sign-out-alt mr-2"></i>로그아웃
+              </a>
+            </div>
+          </div>
+        </div>            
+          
+        <div class="card-body">
+          <div class="row h-100">
+            <!-- 왼쪽 검색 영역 -->
+            <div class="col-md-6 main-content">
+              <div class="search-container">
+                <div class="search-input-wrapper">
+                  <input type="text" id="newsSearchInput" class="search-input" placeholder="관심있는 주식을 검색하세요!">
+                  <i class="fas fa-search search-icon" id="newsSearchButton"></i>
+                </div>
+                <p class="search-info" style="color: #CED4DA;">현재는 미국 금융 시장 검색 기능만 지원합니다.</p>
+                <div class="sentiment-legend">
+                  <i class="fas fa-angry legend-icon negative"></i>
+                  <div class="legend-bar">
+                    <div class="legend-segment" data-sentiment="1"></div>
+                    <div class="legend-segment" data-sentiment="2"></div>
+                    <div class="legend-segment" data-sentiment="3"></div>
+                    <div class="legend-segment" data-sentiment="4"></div>
+                    <div class="legend-segment" data-sentiment="5"></div>
+                  </div>
+                  <i class="fas fa-grin-stars legend-icon positive"></i>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 오른쪽 뉴스 영역 -->
+            <div class="col-md-6">
+              <div class="news-container">
+                <p class="text-center">🔍 뉴스 검색 후 요약된 기사를 확인하세요.</p>
+                <p class="text-center">색깔에 따라 긍정, 부정, 중립 기사를 확인할 수 있습니다!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+    <script src="{{ request.url_for('static', path='js/sidebar.js') }}"></script>
+    <script src="{{ request.url_for('static', path='js/chat.js') }}"></script>
+    <script>
+      userId = "{{ user_id if user_id else '' }}";
+      
+      $(document).ready(function() {
+          $("#newsSearchButton").click(function() {
+              let query = $("#newsSearchInput").val().trim();
+              if (!query) {
+                  alert("검색어를 입력하세요!");
+                  return;
+              }
+
+              $(".news-container").html("<p class='text-center'>⏳ 검색 중...</p>");
+
+              $.ajax({
+                  url: `/news/search?query=${query}`,
+                  type: "GET",
+                  success: function(response) {
+                      let newsList = response.news;
+                      if (newsList.length === 0) {
+                          $(".news-container").html("<p class='text-center'>😢 관련 뉴스가 없습니다.</p>");
+                          return;
+                      }
+
+                      let html = "";
+                      newsList.forEach(news => {
+                          html += `
+                              <div class="news-item" data-sentiment="${news.sentiment}">
+                                  <div class="news-title"><a href="${news.link}" target="_blank">${news.title}</a></div>
+                                  <div class="news-summary">${news.summary}</div>
+                              </div>
+                          `;
+                      });
+
+                      $(".news-container").html(html);
+                  },
+                  error: function() {
+                      $(".news-container").html("<p class='text-center'>⚠️ 뉴스 검색 중 오류가 발생했습니다.</p>");
+                  }
+              });
+          });
+      });
+    </script>
+  </body>
+</html>

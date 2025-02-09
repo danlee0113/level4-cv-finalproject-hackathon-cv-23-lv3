@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+body, html {
+    height: 100%;
+    margin: 0;
+    background: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-container, .register-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card, .register-card {
+    background-color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-header, .register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header img, .register-header img {
+    width: 70px;
+    height: 70px;
+    border: 1.5px solid #0A64FF;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.login-header h4, .register-header h4 {
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.login-header p, .register-header p {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9rem;
+}
+
+.form-control {
+    background-color: #FFFFFF !important;
+    border: 1px solid #0A64FF !important;
+    color: black !important;
+    border-radius: 8px !important;
+    height: 45px !important;
+    margin-bottom: 1rem;
+}
+
+.btn-login, .btn-register {
+    background-color: #0A64FF !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 8px !important;
+    height: 45px !important;
+    width: 100%;
+}
+
+.btn-login:hover, .btn-register:hover {
+    background-color: #005BB5 !important;
+}
+
+.register-link, .login-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.register-link a, .login-link a {
+    color: #0A64FF;
+    text-decoration: none;
+}
+
+.register-link a:hover, .login-link a:hover {
+    color: #005BB5;
+}
+
+.form-label {
+    color: black !important;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    color: black !important;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: none;
+}
+
+.alert {
+    background-color: #F8D7DA !important;
+    border-color: #ff4444 !important;
+    color: #721c24 !important;
+    margin-bottom: 1.5rem;
+}
+
+.mypage-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mypage-card {
+    background: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.icon_cont_msg {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #0A64FF;
+    margin: 0 auto 15px;
+}
+
+.mypage-header {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mypage-header i {
+    color: white;
+    font-size: 40px;
+    margin-left: 9px;
+}
+
+.mypage-header h4 {
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.mypage-header p {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9rem;
+}
+
+.user-info {
+    background-color: #F7F7F8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-group {
+    margin-bottom: 1rem;
+}
+
+.info-group:last-child {
+    margin-bottom: 0;
+}
+
+.info-group label {
+    color: #000000;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.info-group p {
+    color: #000000;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.btn-edit, .btn-back {
+    background-color: #0A64FF;
+    border: 1px solid #C0C0C0;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-edit:hover, .btn-back:hover {
+    background-color: #005BB5;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-back {
+    margin-top: 0.5rem;
+}
+
+.fas {
+    margin-right: 0.5rem;
+}
+
+.disabled-input {
+    background-color: #2d2d3b !important;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.form-text.text-muted {
+    color: #acacbe !important;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #0A64FF;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 10;
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+}
+
+.form-group {
+    position: relative;
+}
+
+input[type="password"] {
+    padding-right: 40px !important;
+} 

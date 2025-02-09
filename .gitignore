@@ -1,0 +1,46 @@
+# 환경 변수 파일
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 가상환경
+venv/
+ENV/
+
+# IDE 설정
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 도커
+.docker/
+
+# 운영체제
+.DS_Store
+Thumbs.db
+
+.env
+init_docker_container.sh
+commit-msg.txt
+guide.txt
+temp.py

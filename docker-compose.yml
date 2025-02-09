@@ -1,0 +1,58 @@
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.database
+    container_name: mysql-con
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+      - --init-file=/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - example-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: backend-con
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/workspace/fastapi-server
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+    ports:
+      - "9000:9000"
+    command: sh /workspace/fastapi-server/scripts/run_fastapi_server
+    networks:
+      - example-network
+
+volumes:
+  mysql_data:
+
+networks:
+  example-network:
+    external: true
