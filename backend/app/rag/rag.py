@@ -14,7 +14,7 @@ import warnings
 import json
 
 
-DB_INDEX = "VecDB/vecdb_8000_800" # 뒤의 숫자는 차례대로 chunk size와 chunk overlap을 의미
+DB_INDEX = "VecDB/vecdb" # 뒤의 숫자는 차례대로 chunk size와 chunk overlap을 의미
 DOTENV_PATH="/data/ephemeral/home/.env" # 환경 변수 경로
 PROJECT_NAME="hackathon-module" # Langsmith에서 추적될 프로젝트의 이름 
 
@@ -101,7 +101,7 @@ prompt = PromptTemplate.from_template(
     # Output Format:
     [General introduction of the answer]
     [Comprehensive answer to the question]
-
+    [Source of context(출처)]
     ###
 
     Remember:
@@ -123,6 +123,7 @@ prompt = PromptTemplate.from_template(
 
     # Your final ANSWER to the user's QUESTION:
     """
+
 )
 
 # RAG 체인 정의
