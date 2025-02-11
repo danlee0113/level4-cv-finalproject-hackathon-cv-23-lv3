@@ -44,7 +44,7 @@ pip install -r requirements.txt
 서비스를 웹페이지에서 사용하려면 다음 링크를 통해 접속하실 수 있습니다. [ReportRadar](http://reportradar.site:9000/)
 
 ## 📊 서비스 아키텍쳐
-![image](https://github.com/user-attachments/assets/f176002b-035f-4011-a99f-9da1cff1266c)
+![image](https://github.com/user-attachments/assets/68a01da9-1843-4cf0-941b-8f8f653cda93)
 
 !!!!!!설명필요!!!!!!!
 
