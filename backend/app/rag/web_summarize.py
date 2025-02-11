@@ -69,7 +69,7 @@ Return the response in JSON format as a list (length 4) of dictionaries with the
 )
 
 
-# Create the chain, including
+# chain 생성
 chain = (
     prompt
     | ChatOpenAI(

@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 
 
 CACHE_DIR= "/workspace/fastapi-server/app/rag/cache"
-MODEL_NAME="gpt-4o-mini-2024-07-18"
+MODEL_NAME="gpt-4o-mini"
  
 
 
@@ -24,7 +24,7 @@ cached_embeddings = CacheBackedEmbeddings.from_bytes_store(
 
 # llm 모델 초기화
 llm = ChatOpenAI(
-    model=MODEL_NAME, # "gpt-4o-mini-2024-07-18"
+    model=MODEL_NAME, # "gpt-4o-mini"
     temperature=0,
 )
 
@@ -37,7 +37,7 @@ embeddings_info = {
 }
 
 llm_info = {
-    "model_name": "gpt-4o-mini-2024-07-18",
+    "model_name": MODEL_NAME,
     "temperature": 0,
 }
 
