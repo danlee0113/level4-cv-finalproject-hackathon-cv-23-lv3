@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/3b9a28b5-68c0-46f0-a1a4-4ce0efd5854b)
 # ReportRadar
 
 ## 🚀 프로젝트 개요
@@ -42,7 +41,10 @@ pip install -r requirements.txt
 
 ## 📌 웹페이지 소개
 서비스를 웹페이지에서 사용하려면 다음 링크를 통해 접속하실 수 있습니다. [ReportRadar](http://reportradar.site:9000/)
-![소개 페이지](https://github.com/user-attachments/assets/f6639f9b-c489-4acd-922d-97e59d9c2745)
+
+### 소개 페이지 
+<img width="1322" alt="img (3)" src="https://github.com/user-attachments/assets/f6639f9b-c489-4acd-922d-97e59d9c2745">
+
 
 
 ## 📊 서비스 아키텍쳐
