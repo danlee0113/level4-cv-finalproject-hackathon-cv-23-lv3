@@ -32,12 +32,17 @@ cd level4-cv-finalproject-hackathon-cv-23-lv3
 # 기본 설정
 sudo apt-get update
 sudo apt-get remove docker docker-engine docker.io
-sudo apt install docker.io # docker 설치
+
+# docker 설치
+sudo apt install docker.io
+
 sudo systemctl start docker
-sudo docker ps # 정상 실행되면 잘 설치된 것
+sudo docker ps
 sudo systemctl enable docker
-docker —version # 정상 실행되면 도커 잘 설치 된 것
-sudo apt install docker-compose # docker-compose 설치
+docker —version
+
+# docker-compose 설치
+sudo apt install docker-compose 
 
 # .env 파일 생성 후 내용 채워넣기
 
@@ -50,8 +55,8 @@ sudo docker network create example-network
 
 # Docker 빌드
 sudo docker-compose -f docker-compose.yml up -d --build
-sudo docker ps # 컨테이너 뜨면 잘 된것
-sudo docker images # 이미지 뜨면 잘 된것
+sudo docker ps
+sudo docker images
 
 # Docker 컨테이너 실행
 sudo docker exec -it backend-con /bin/bash
