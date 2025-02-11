@@ -22,21 +22,44 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 - **데이터베이스:** MySQL
 - **기타:** Docker, AWS EC2, AWS Route53
 
-## 🔧 설치 및 실행 방법
+## 🔧 설치 및 실행 방법 (AWS EC2 인스턴스 서버 기준)
 ```bash
+# EC2 인스턴스 생성(리전 서울로), 탄력적 IP 설정 후 진행
 # 저장소 클론
 git clone https://github.com/boostcampaitech7/level4-cv-finalproject-hackathon-cv-23-lv3.git
-cd project
+cd level4-cv-finalproject-hackathon-cv-23-lv3
 
-# 가상 환경 생성 및 활성화
-python -m venv venv
-source venv/bin/activate  # Windows는 venv\Scripts\activate
+# 기본 설정
+sudo apt-get update
+sudo apt-get remove docker docker-engine docker.io
+sudo apt install docker.io # docker 설치
+sudo systemctl start docker
+sudo docker ps # 정상 실행되면 잘 설치된 것
+sudo systemctl enable docker
+docker —version # 정상 실행되면 도커 잘 설치 된 것
+sudo apt install docker-compose # docker-compose 설치
 
-# 필요한 패키지 설치
-pip install -r requirements.txt
+# .env 파일 생성 후 내용 채워넣기
 
-# 애플리케이션 실행
-!!!!!!! 추가해야 함!!!!
+# Docker 네트워크 생성 (이미 있으면 생략)
+sudo docker network ls
+sudo docker network create example-network
+
+# 오류 발생한다면 docker-compose.yml 에서 db volumes 수정
+# - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+# Docker 빌드
+sudo docker-compose -f docker-compose.yml up -d --build
+sudo docker ps # 컨테이너 뜨면 잘 된것
+sudo docker images # 이미지 뜨면 잘 된것
+
+# Docker 컨테이너 실행
+sudo docker exec -it backend-con /bin/bash
+
+# 컨테이너 내부에서 fastAPI실행
+uvicorn app.main:app --host 0.0.0.0 --port 9000
+
+# 참고 유튜브 : https://www.youtube.com/watch?v=oIX6T4X6hGM
 ```
 
 ## 📌 웹페이지 소개
