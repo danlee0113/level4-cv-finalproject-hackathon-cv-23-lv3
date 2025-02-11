@@ -1,5 +1,7 @@
+/* Google Fonts - Poppins 폰트 불러오기 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
+/* 기본 body와 html 스타일 초기화 */
 body, html {
     height: 100%;
     margin: 0;
@@ -7,46 +9,52 @@ body, html {
     font-family: 'Poppins', sans-serif;
 }
 
+/* 로그인/회원가입 컨테이너 스타일링 */
 .login-container, .register-container {
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;          /* 수직 중앙 정렬 */
+    justify-content: center;      /* 수평 중앙 정렬 */
 }
 
+/* 로그인/회원가입 카드 스타일링 */
 .login-card, .register-card {
     background-color: #FFFFFF !important;
     border: none !important;
     border-radius: 8px !important;
     padding: 2rem;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;            /* 최대 너비 제한 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  /* 그림자 효과 */
 }
 
+/* 헤더 섹션 스타일링 */
 .login-header, .register-header {
     text-align: center;
     margin-bottom: 2rem;
 }
 
+/* 헤더 이미지 스타일링 */
 .login-header img, .register-header img {
     width: 70px;
     height: 70px;
     border: 1.5px solid #0A64FF;
-    border-radius: 50%;
+    border-radius: 50%;          /* 원형 이미지 */
     margin-bottom: 1rem;
 }
 
+/* 헤더 텍스트 스타일링 */
 .login-header h4, .register-header h4 {
     color: black;
     margin-bottom: 0.5rem;
 }
 
 .login-header p, .register-header p {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.6);   /* 반투명 검은색 */
     font-size: 0.9rem;
 }
 
+/* 입력 필드 스타일링 */
 .form-control {
     background-color: #FFFFFF !important;
     border: 1px solid #0A64FF !important;
@@ -56,6 +64,7 @@ body, html {
     margin-bottom: 1rem;
 }
 
+/* 버튼 스타일링 */
 .btn-login, .btn-register {
     background-color: #0A64FF !important;
     border: none !important;
@@ -65,30 +74,36 @@ body, html {
     width: 100%;
 }
 
+/* 버튼 호버 효과 */
 .btn-login:hover, .btn-register:hover {
     background-color: #005BB5 !important;
 }
 
+/* 링크 컨테이너 스타일링 */
 .register-link, .login-link {
     text-align: center;
     margin-top: 1rem;
 }
 
+/* 링크 스타일링 */
 .register-link a, .login-link a {
     color: #0A64FF;
     text-decoration: none;
 }
 
+/* 링크 호버 효과 */
 .register-link a:hover, .login-link a:hover {
     color: #005BB5;
 }
 
+/* 폼 레이블 스타일링 */
 .form-label {
     color: black !important;
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
 }
 
+/* 폼 그룹 스타일링 */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -108,6 +123,7 @@ body, html {
     display: none;
 }
 
+/* 알림 메시지 스타일링 */
 .alert {
     background-color: #F8D7DA !important;
     border-color: #ff4444 !important;
@@ -115,6 +131,7 @@ body, html {
     margin-bottom: 1.5rem;
 }
 
+/* 마이페이지 관련 스타일링 */
 .mypage-container {
     height: 100vh;
     display: flex;
@@ -122,6 +139,7 @@ body, html {
     justify-content: center;
 }
 
+/* 마이페이지 카드 스타일링 */
 .mypage-card {
     background: #FFFFFF;
     padding: 30px;
@@ -131,6 +149,7 @@ body, html {
     max-width: 400px;
 }
 
+/* 아이콘 컨테이너 스타일링 */
 .icon_cont_msg {
     width: 80px;
     height: 80px;
@@ -257,5 +276,5 @@ body, html {
 }
 
 input[type="password"] {
-    padding-right: 40px !important;
+    padding-right: 40px !important;  /* 토글 버튼 공간 확보 */
 } 

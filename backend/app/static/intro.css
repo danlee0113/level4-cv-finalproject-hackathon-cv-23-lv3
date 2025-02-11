@@ -1,3 +1,4 @@
+/* Google Fonts - Poppins 폰트 불러오기 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 :root {
@@ -5,20 +6,23 @@
     --white-color: #FFFFFF;
 }
 
+/* 기본 body 스타일 초기화 */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
 
+/* 인트로 페이지 메인 컨테이너 */
 .intro-container {
-    min-height: 100vh;
+    min-height: 100vh;           /* 최소 화면 높이 설정 */
     background-image: url('../static/images/main-background.jpeg');
-    background-size: cover;
+    background-size: cover;      /* 배경 이미지 크기 조정 */
     background-position: center;
     position: relative;
 }
 
+/* 배경 이미지 위에 어두운 오버레이 추가 */
 .intro-container::before {
     content: '';
     position: absolute;
@@ -26,41 +30,47 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);  /* 반투명 검은색 오버레이 */
 }
 
+/* 상단 네비게이션 바 스타일링 */
 .intro-nav {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem 4rem;
-    z-index: 1;
+    z-index: 1;                  /* 오버레이 위에 표시 */
 }
 
+/* 브랜드 로고 스타일링 */
 .nav-brand {
     color: var(--white-color);
     font-size: 1.5rem;
     font-weight: 600;
 }
 
+/* 네비게이션 링크 컨테이너 */
 .nav-links {
     display: flex;
     gap: 2rem;
     align-items: center;
 }
 
+/* 네비게이션 링크 스타일링 */
 .nav-link {
     color: var(--white-color);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease;   /* 부드러운 호버 효과 */
 }
 
+/* 네비게이션 링크 호버 효과 */
 .nav-link:hover {
     color: var(--primary-color);
     text-decoration: none;
 }
 
+/* 네비게이션 버튼 스타일링 */
 .nav-btn {
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -70,20 +80,23 @@ body {
     transition: all 0.3s ease;
 }
 
+/* 네비게이션 버튼 호버 효과 */
 .nav-btn:hover {
-    background-color: #0850cc;
+    background-color: #0850cc;   /* 더 진한 파란색 */
     color: var(--white-color);
     text-decoration: none;
 }
 
+/* 히어로 섹션 스타일링 */
 .hero-section {
     position: relative;
     text-align: center;
     color: var(--white-color);
-    padding-top: 15vh;
-    z-index: 1;
+    padding-top: 15vh;           /* 상단 여백 */
+    z-index: 1;                  /* 오버레이 위에 표시 */
 }
 
+/* 히어로 섹션 제목 스타일링 */
 .hero-section h1 {
     font-size: 3.5rem;
     font-weight: 700;
@@ -91,12 +104,14 @@ body {
     line-height: 1.2;
 }
 
+/* 히어로 섹션 설명 텍스트 스타일링 */
 .hero-section p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9);  /* 약간 투명한 흰색 */
 }
 
+/* CTA(Call-to-Action) 버튼 스타일링 */
 .cta-button {
     display: inline-block;
     background-color: #0A64FF;
@@ -108,9 +123,10 @@ body {
     transition: all 0.3s ease;
 }
 
+/* CTA 버튼 호버 효과 */
 .cta-button:hover {
-    background-color: #005BB5;
+    background-color: #005BB5;   /* 더 진한 파란색 */
     color: #FFFFFF;
     text-decoration: none;
-    transform: translateY(-2px);
+    transform: translateY(-2px);  /* 살짝 위로 떠오르는 효과 */
 }

@@ -25,28 +25,36 @@
           <p>내 정보 관리</p>
         </div>
         
+        <!-- 사용자 정보 표시 섹션 -->
         <div class="user-info">
+          <!-- 이메일 정보 -->
           <div class="info-group">
             <label>이메일</label>
             <p>{{ user.email }}</p>
           </div>
+          <!-- 닉네임 정보 -->
           <div class="info-group">
             <label>닉네임</label>
             <p>{{ user.nickname }}</p>
           </div>
+          <!-- 가입일 정보 -->
           <div class="info-group">
             <label>가입일</label>
             <p>{{ user.created_at.strftime('%Y년 %m월 %d일') }}</p>
           </div>
         </div>
 
+        <!-- 작업 버튼 그룹 -->
         <div class="action-buttons">
+          <!-- 프로필 수정 버튼 -->
           <a href="{{ request.url_for('edit_profile_page') }}" class="btn btn-edit">
             <i class="fas fa-user-edit"></i> 프로필 수정
           </a>
+          <!-- 비밀번호 변경 버튼 -->
           <a href="{{ request.url_for('change_password_page') }}" class="btn btn-edit">
             <i class="fas fa-key"></i> 비밀번호 변경
           </a>
+          <!-- 채팅 페이지로 돌아가기 버튼 -->
           <a href="{{ request.url_for('show_user_chats') }}" class="btn btn-back">
             <i class="fas fa-arrow-left"></i> 채팅으로 돌아가기
           </a>

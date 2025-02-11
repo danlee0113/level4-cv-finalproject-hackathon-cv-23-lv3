@@ -22,25 +22,38 @@
           <h4>ReportRadar</h4>
           <p>증권사 리포트 AI 어시스턴트</p>
         </div>
+        
+        <!-- 로그인 폼 -->
         <form action="{{ request.url_for('login') }}" method="POST">
+          <!-- 에러 메시지 표시 영역 -->
           {% if error %}
           <div class="alert alert-danger" role="alert">
             {{ error }}
           </div>
           {% endif %}
+          
+          <!-- 이메일 입력 필드 -->
           <div class="form-group">
             <input type="email" class="form-control" name="email" placeholder="이메일" required>
           </div>
+          
+          <!-- 비밀번호 입력 필드 -->
           <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
           </div>
+          
+          <!-- 로그인 버튼 -->
           <button type="submit" class="btn btn-login">로그인</button>
         </form>
+        
+        <!-- 회원가입 링크 -->
         <div class="register-link">
           <a href="{{ request.url_for('register_page') }}">계정이 없으신가요? 회원가입하기</a>
         </div>
       </div>
     </div>
+    
+    <!-- 비밀번호 토글 기능을 위한 자바스크립트 -->
     <script src="{{ request.url_for('static', path='js/password-toggle.js') }}"></script>
   </body>
 </html> 

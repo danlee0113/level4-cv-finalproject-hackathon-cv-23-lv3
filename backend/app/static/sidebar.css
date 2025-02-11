@@ -1,44 +1,48 @@
-/* GOOGLE FONTS */
+/* GOOGLE FONTS - Poppins 폰트 불러오기 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
+/* CSS 변수 정의 */
 :root {
-    --nav--width: 92px;
-    --first-color: #444654;  /* 기존 파란색에서 ReportRadar 테마 색상으로 변경 */
-    --bg-color: #202123;     /* 사이드바 배경색 */
-    --sub-color: #acacbe;    /* 서브메뉴 텍스트 색상 */
-    --white-color: #fff;
-    --body-font: 'Poppins', sans-serif;
-    --normal-font-size: 1rem;
-    --small-font-size: .875rem;
-    --z-fixed: 100;
+    --nav--width: 92px;                /* 사이드바 기본 너비 */
+    --first-color: #444654;            /* 주요 강조 색상 (ReportRadar 테마) */
+    --bg-color: #202123;               /* 사이드바 배경색 */
+    --sub-color: #acacbe;              /* 서브메뉴 텍스트 색상 */
+    --white-color: #fff;               /* 흰색 텍스트 */
+    --body-font: 'Poppins', sans-serif;/* 기본 폰트 */
+    --normal-font-size: 1rem;          /* 기본 폰트 크기 */
+    --small-font-size: .875rem;        /* 작은 폰트 크기 */
+    --z-fixed: 100;                    /* z-index 고정값 */
 }
 
+/* 기본 박스 사이징 설정 */
 *, ::before, ::after {
     box-sizing: border-box;
 }
 
+/* 본문 스타일링 */
 body {
     position: relative;
     margin: 0;
-    padding: 2rem 0 0 6.75rem;
+    padding: 2rem 0 0 6.75rem;         /* 상단 및 좌측 여백 */
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
-    transition: .5s;
-    background-color: #343541;  /* ReportRadar 메인 배경색 */
+    transition: .5s;                    /* 애니메이션 효과 */
+    background-color: #343541;          /* ReportRadar 메인 배경색 */
 }
 
+/* 사이드바 네비게이션 컨테이너 */
 .l-navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: var(--nav--width);
-    height: 100vh;
+    height: 100vh;                      /* 전체 화면 높이 */
     background-color: var(--bg-color);
     color: var(--white-color);
     padding: 1.5rem 1.5rem 2rem;
     transition: .5s;
     z-index: var(--z-fixed);
-    border-right: 1px solid #4a4b53;  /* 구분선 추가 */
+    border-right: 1px solid #4a4b53;    /* 구분선 */
 }
 
 .nav {
@@ -81,6 +85,7 @@ a.nav__logo:hover {
     text-decoration: none !important;
 }
 
+/* 네비게이션 링크 스타일링 */
 .nav__link {
     display: grid;
     grid-template-columns: max-content max-content;
@@ -88,9 +93,9 @@ a.nav__logo:hover {
     column-gap: .75rem;
     padding: .75rem;
     color: var(--white-color);
-    border-radius: .5rem;
+    border-radius: .5rem;               /* 둥근 모서리 */
     margin-bottom: 1rem;
-    transition: .3s;
+    transition: .3s;                    /* 호버 애니메이션 */
     cursor: pointer;
 }
 
@@ -106,12 +111,12 @@ a.nav__logo:hover {
     font-size: var(--small-font-size);
 }
 
-/* Expander menu */
+/* 확장된 메뉴 너비 설정 */
 .expander {
-    width: calc(var(--nav--width) + 9.25rem);
+    width: calc(var(--nav--width) + 9.25rem);  /* 확장 시 사이드바 너비 */
 }
 
-/* Add padding body*/
+/* 본문 패딩 조정 (사이드바 확장 시) */
 .body-pd {
     padding: 2rem 0 0 16rem;
 }
@@ -157,27 +162,27 @@ a.nav__logo:hover {
     transition: .5s;
 }
 
-/* 세션 컨테이너 스타일링 */
+/* 세션 관련 스타일링 */
 .sessions-container {
-    max-height: calc(100vh - 320px);
-    overflow-y: auto;
+    max-height: calc(100vh - 320px);    /* 최대 높이 설정 */
+    overflow-y: auto;                   /* 세로 스크롤 활성화 */
     padding-right: 0.5rem;
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: var(--first-color) transparent; /* Firefox */
+    scrollbar-width: thin;              /* Firefox 스크롤바 */
+    scrollbar-color: var(--first-color) transparent;
 }
 
-/* Webkit 브라우저(Chrome, Safari 등)를 위한 스크롤바 스타일링 */
+/* 스크롤바 커스텀 스타일링 (Webkit 브라우저용) */
 .sessions-container::-webkit-scrollbar {
-    width: 6px;
+    width: 6px;                         /* 스크롤바 너비 */
 }
 
 .sessions-container::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent;            /* 스크롤바 트랙 배경 */
 }
 
 .sessions-container::-webkit-scrollbar-thumb {
-    background-color: var(--first-color);
-    border-radius: 3px;
+    background-color: var(--first-color);/* 스크롤바 색상 */
+    border-radius: 3px;                 /* 스크롤바 모서리 둥글게 */
 }
 
 .sessions-list {
@@ -190,6 +195,7 @@ a.nav__logo:hover {
     margin-bottom: 0.5rem;
 }
 
+/* 세션 버튼 스타일링 */
 .session-button {
     display: grid;
     grid-template-columns: max-content max-content;
@@ -201,11 +207,9 @@ a.nav__logo:hover {
     background: transparent;
     border: none;
     border-radius: 0.5rem;
-
     font-size: 0.875rem;
     cursor: pointer;
-    
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;  /* 호버 애니메이션 */
     margin-bottom: 1rem;
 }
 

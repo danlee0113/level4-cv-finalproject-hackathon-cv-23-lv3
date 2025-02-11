@@ -5,43 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReportRadar</title>
 
-    <!-- CSS -->
+    <!-- 외부 CSS 파일 및 라이브러리 로드 -->
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
       rel="stylesheet"
       id="bootstrap-css"
     />
+    <!-- 사용자 정의 스타일시트 로드 -->
     <link rel="stylesheet" href="{{ request.url_for('static', path='sidebar.css') }}">
     <link rel="stylesheet" href="{{ request.url_for('static', path='style.css') }}">
     <link rel="stylesheet" href="{{ request.url_for('static', path='news.css') }}">
-    <!-- FontAwesome -->
+    <!-- FontAwesome 아이콘 라이브러리 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   </head>
 
   <body id="body-pd">
+    <!-- 사이드바 네비게이션 -->
     <div class="l-navbar" id="navbar">
       <nav class="nav">
         <div>
+          <!-- 브랜드 로고 및 토글 버튼 -->
           <div class="nav__brand">
             <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
             <div class="nav__logo">ReportRadar</div>
           </div>
+          
+          <!-- 네비게이션 메뉴 목록 -->
           <div class="nav__list">
+            <!-- 새 채팅 버튼 -->
             <a href="{{ request.url_for('show_user_chats') }}" class="nav__link">
               <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
               <span class="nav_name">새 채팅</span>
             </a>
             
+            <!-- 뉴스 요약 버튼 -->
             <a href="{{ request.url_for('news') }}" class="nav__link">
                 <ion-icon name="newspaper-outline" class="nav__icon"></ion-icon>
                 <span class="nav_name">뉴스 요약</span>
-              </a>
+            </a>
   
+            <!-- 최근 대화 섹션 -->
             <div class="nav__recent">
               <span class="nav_name nav_recent_title">최신</span>
             </div>
 
-            <!-- 세션 목록 (최신 위) -->
+            <!-- 채팅 세션 목록 -->
             <div class="sessions-container">
               <ul class="sessions-list" id="sessionList">
                 {% for session in chat_sessions %}
@@ -63,10 +71,13 @@
       </nav>
     </div>
 
+    <!-- 메인 컨텐츠 영역 -->
     <div class="container-fluid h-100">
       <div class="chat card h-100">
+        <!-- 헤더 영역 -->
         <div class="card-header msg_head d-flex justify-content-between align-items-center">
           <h4 class="mb-0">ReportRadar News</h4>
+          <!-- 사용자 프로필 드롭다운 -->
           <div class="user-profile dropdown">
             <div class="icon-container" data-toggle="dropdown">
               <i class="fas fa-user"></i>
@@ -83,16 +94,19 @@
           </div>
         </div>            
           
+        <!-- 본문 영역 -->
         <div class="card-body">
           <div class="row h-100">
             <!-- 왼쪽 검색 영역 -->
             <div class="col-md-6 main-content">
               <div class="search-container">
+                <!-- 검색 입력창 -->
                 <div class="search-input-wrapper">
                   <input type="text" id="newsSearchInput" class="search-input" placeholder="관심있는 주식을 검색하세요!">
                   <i class="fas fa-search search-icon" id="newsSearchButton"></i>
                 </div>
                 <p class="search-info" style="color: #CED4DA;">현재는 미국 금융 시장 검색 기능만 지원합니다.</p>
+                <!-- 감정 분석 범례 -->
                 <div class="sentiment-legend">
                   <i class="fas fa-angry legend-icon negative"></i>
                   <div class="legend-bar">
@@ -107,7 +121,7 @@
               </div>
             </div>
             
-            <!-- 오른쪽 뉴스 영역 -->
+            <!-- 오른쪽 뉴스 표시 영역 -->
             <div class="col-md-6">
               <div class="news-container">
                 <p class="text-center">🔍 뉴스 검색 후 요약된 기사를 확인하세요.</p>
@@ -119,16 +133,21 @@
       </div>
     </div>
 
-    <!-- JS -->
+    <!-- 외부 JavaScript 라이브러리 로드 -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+    <!-- 사용자 정의 스크립트 로드 -->
     <script src="{{ request.url_for('static', path='js/sidebar.js') }}"></script>
     <script src="{{ request.url_for('static', path='js/chat.js') }}"></script>
+    
+    <!-- 뉴스 검색 기능 구현 스크립트 -->
     <script>
+      // 사용자 ID 설정
       userId = "{{ user_id if user_id else '' }}";
       
       $(document).ready(function() {
+          // 검색 버튼 클릭 이벤트 처리
           $("#newsSearchButton").click(function() {
               let query = $("#newsSearchInput").val().trim();
               if (!query) {
@@ -136,8 +155,10 @@
                   return;
               }
 
+              // 검색 중 로딩 표시
               $(".news-container").html("<p class='text-center'>⏳ 검색 중...</p>");
 
+              // AJAX를 통한 뉴스 검색 요청
               $.ajax({
                   url: `/news/search?query=${query}`,
                   type: "GET",
@@ -148,6 +169,7 @@
                           return;
                       }
 
+                      // 검색 결과 표시
                       let html = "";
                       newsList.forEach(news => {
                           html += `
