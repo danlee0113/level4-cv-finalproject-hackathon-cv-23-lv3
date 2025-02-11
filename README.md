@@ -16,6 +16,16 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 | --- | --- | --- | --- | --- |
 | <a href="https://github.com/inDseok" target="_blank"><img src="https://img.shields.io/badge/Github-black.svg?&style=round&logo=github"/></a> | <a href="https://github.com/KimJunWon98" target="_blank"><img src="https://img.shields.io/badge/Github-black.svg?&style=round&logo=github"/></a> | <a href="https://github.com/SeokjunShin" target="_blank"><img src="https://img.shields.io/badge/Github-black.svg?&style=round&logo=github"/></a> | <a href="https://github.com/alsghks1066" target="_blank"><img src="https://img.shields.io/badge/Github-black.svg?&style=round&logo=github"/></a> | <a href="https://github.com/danlee0113" target="_blank"><img src="https://img.shields.io/badge/Github-black.svg?&style=round&logo=github"/></a> |
 
+## 💁🏻‍♀️ 역할 소개
+| 이름 | 역할 |
+|---------|---------|
+| 김민환   | HTML,CSS,JavaScript를 활용한 프론트엔트 개발, AWS EC2/Route53을 사용한 배포 환경 개발   |
+| 김준원   | DB설계, 배포를 위한 환경 설정(Docker-compose), FastAPI~   |
+| 전인석   | DB설계, 배포를 위한 환경 설정(Docker-compose), FastAPI~   |
+| 이준학   | GPT API, LangChain 을 활용한 금융 보고서 LLM모델 설계 및 실험, FAISS~  |
+| 신석준   | GPT API, LangChain 을 활용한 금융 보고서 LLM모델 설계 및 실험, FAISS  |
+
+
 ## 🛠 기술 스택
 - **언어:** Python, Html, CSS, JavaScript
 - **프레임워크:** FastAPI
@@ -25,6 +35,17 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 
 ## 📆 프로젝트 타임라인
 <img width="1322" alt="img (0)" src="https://github.com/user-attachments/assets/a85c3d82-6d33-44c6-ae81-b6e1b4fd67df">
+
+## 🧠 서비스 아키텍쳐
+![image](https://github.com/user-attachments/assets/68a01da9-1843-4cf0-941b-8f8f653cda93)
+우리의 프로젝트는 RAG를 활용한 금융 리포트 분석 및 질의응답을 제공하는 AI 챗봇입니다.
+사용자는 챗봇을 통해 금융 리포트 정보를 질문하고, AI가 내용을 분석하여 질의응답을 수행합니다.
+
+⚙️ 서비스 사용 흐름
+1️⃣ 사용자는 ReportRadar에 로그인 후 챗봇에게 금융 리포트, 주식에 관한 정보를 물어봅니다.
+2️⃣ AI가 LangChain & GPT API를 활용하여 DB에 저장된 리포트 내용을 분석하고 FAISS 벡터 검색을 적용합니다.
+3️⃣ 사용자는 챗봇과 대화하면서 금융 리포트 관련 질문을 하고 답변을 받습니다.
+4️⃣ 모든 데이터는 MySQL에 저장되며, FastAPI와 EC2 인스턴스를 활용한 서버를 통해 안정적으로 관리됩니다.
 
 ## 🔧 설치 및 실행 방법 (AWS EC2 인스턴스 서버 기준)
 ```bash
