@@ -17,10 +17,10 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 
 ## 🛠 기술 스택
 !!!! 고쳐야 함!!!!
-- **언어:** Python, JavaScript
-- **프레임워크:** FastAPI, React
-- **데이터베이스:** PostgreSQL
-- **기타:** Docker, AWS
+- **언어:** Python, Html, CSS, JavaScript
+- **프레임워크:** FastAPI, LangChain, (FAISS??)
+- **데이터베이스:** MySQL
+- **기타:** Docker, AWS EC2, AWS Route53
 
 ## 🔧 설치 및 실행 방법
 ```bash
