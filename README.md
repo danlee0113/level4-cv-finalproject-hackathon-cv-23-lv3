@@ -71,14 +71,16 @@ uvicorn app.main:app --host 0.0.0.0 --port 9000
 # 참고 유튜브 : https://www.youtube.com/watch?v=oIX6T4X6hGM
 ```
 ## 📌 웹페이지 소개
-서비스를 웹페이지에서 사용하려면 다음 링크를 통해 접속하실 수 있습니다. [ReportRadar](http://reportradar.site:9000/)
+- 서비스를 웹페이지에서 사용하려면 다음 링크를 통해 접속하실 수 있습니다. [ReportRadar](http://reportradar.site:9000/)
 
 ### ❓ 소개 페이지 
 <img width="1322" alt="img (3)" src="https://github.com/user-attachments/assets/f6639f9b-c489-4acd-922d-97e59d9c2745">
 
 ### 💬 챗봇 페이지
 <img width="1322" alt="img (2)" src="https://github.com/user-attachments/assets/3dda5a9a-9a95-4d72-b391-1b7007e1a0d8">
+
 - 증권 리포트를 통해 사용자가 질문한 내용에 대한 정보를 제공합니다.
+
 - 좌측의 사이드바를 통해 이전의 채팅 기록을 확인해 볼 수 있습니다.
 
 ### 📰 뉴스 요약 페이지
