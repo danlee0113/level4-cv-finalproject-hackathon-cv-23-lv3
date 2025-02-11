@@ -5,7 +5,7 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 1. 주어진 리포트의 내용을 검색해 사용자에게 해당 종목에 대한 정보를 제공합니다.
 2. 미국 주식에 대한 최신 뉴스를 요약하여 제공합니다.
 
-## 🎥 시연 영상 | [웹페이지 링크](http://reportradar.site:9000/) [시연 영상](https://drive.google.com/file/d/1h5eSfZKve2JPg7OpYzVgjnn5EwW5q8qd/view?usp=sharing)
+## 🎥 시연 영상 | [[웹페이지 링크]](http://reportradar.site:9000/) [[시연 영상]](https://drive.google.com/file/d/1h5eSfZKve2JPg7OpYzVgjnn5EwW5q8qd/view?usp=sharing)
 
 ## 👥 팀 소개
 끝까지 도전하며 함께 배우고 성장하는 팀, CV 미정입니다!
