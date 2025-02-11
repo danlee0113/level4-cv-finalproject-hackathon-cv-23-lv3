@@ -83,8 +83,11 @@ uvicorn app.main:app --host 0.0.0.0 --port 9000
 
 ### 📰 뉴스 요약 페이지
 <img width="1322" alt="img (1)" src="https://github.com/user-attachments/assets/aada4ccf-0fb2-4db8-b463-c311ccb67327">
+
 - 사용자가 관심 있는 미국 주식 종목을 입력하면 해당 종목에 대한 뉴스를 웹에서 검색합니다.
+
 - 검색한 뉴스 내용을 LLM을 통해 요약해서 사용자에게 제공합니다.
+
 - 이때, LLM이 감성 분석을 통해 뉴스가 좋은 소식인지 나쁜 소식인지 판단하여 테두리의 색깔로 표현해줍니다.
 
 ## 📊 서비스 아키텍쳐
