@@ -22,6 +22,9 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 - **데이터베이스:** MySQL
 - **기타:** Docker, AWS EC2, AWS Route53
 
+## 📆 프로젝트 타임라인
+
+
 ## 🔧 설치 및 실행 방법 (AWS EC2 인스턴스 서버 기준)
 ```bash
 # EC2 인스턴스 생성(리전 서울로), 탄력적 IP 설정 후 진행
@@ -72,7 +75,6 @@ uvicorn app.main:app --host 0.0.0.0 --port 9000
 
 ### 소개 페이지 
 <img width="1322" alt="img (3)" src="https://github.com/user-attachments/assets/f6639f9b-c489-4acd-922d-97e59d9c2745">
-
 
 
 ## 📊 서비스 아키텍쳐
