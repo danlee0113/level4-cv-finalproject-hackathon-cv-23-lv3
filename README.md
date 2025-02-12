@@ -41,6 +41,8 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 우리의 프로젝트는 RAG를 활용한 금융 리포트 분석 및 질의응답을 제공하는 AI 챗봇입니다.
 사용자는 챗봇을 통해 금융 리포트 정보를 질문하고, AI가 내용을 분석하여 질의응답을 수행합니다.
 
+- 서비스에 대한 구체적인 사항은 해당 문서를 통해 확인할 수 있습니다. [해커톤 발표 자료](https://docs.google.com/presentation/d/11-XjSjRWaBerM0oHidUuqP5iUmGHUhAUxnGmPau7kaY/edit?usp=sharing)
+
 ⚙️ 서비스 사용 흐름
 1. 사용자는 ReportRadar에 로그인 후 챗봇에게 금융 리포트, 주식에 관한 정보를 물어봅니다.
 2. AI가 LangChain & GPT API를 활용하여 DB에 저장된 리포트 내용을 분석하고 FAISS 벡터 검색을 적용합니다.
@@ -113,10 +115,6 @@ uvicorn app.main:app --host 0.0.0.0 --port 9000
 
 - 이때, LLM이 감성 분석을 통해 뉴스가 좋은 소식인지 나쁜 소식인지 판단하여 테두리의 색깔로 표현해줍니다.
 
-## 📊 서비스 아키텍쳐
-![image](https://github.com/user-attachments/assets/68a01da9-1843-4cf0-941b-8f8f653cda93)
-
-- 서비스에 대한 구체적인 사항은 해당 문서를 통해 확인할 수 있습니다. [해커톤 발표 자료](https://docs.google.com/presentation/d/11-XjSjRWaBerM0oHidUuqP5iUmGHUhAUxnGmPau7kaY/edit?usp=sharing)
 
 
 ## 📚 참고 자료
