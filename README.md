@@ -20,9 +20,9 @@ ReportRadar는 증권 리포트 기반의 주식 LLM 서비스입니다. 대략�
 | 이름 | 역할 |
 |---------|---------|
 | 김민환   | HTML,CSS,JavaScript를 활용한 프론트엔트 개발, AWS EC2/Route53을 사용한 배포 환경 개발   |
-| 김준원   | DB설계, 배포를 위한 환경 설정(Docker-compose), FastAPI~   |
-| 전인석   | DB설계, 배포를 위한 환경 설정(Docker-compose), FastAPI~   |
-| 이준학   | GPT API, LangChain 을 활용한 금융 보고서 LLM모델 설계 및 실험, FAISS~  |
+| 김준원   | DB설계, 배포를 위한 환경 설정(Docker-compose), FastAPI   |
+| 전인석   | DB설계, 배포를 위한 환경 설정(Docker-compose), FastAPI   |
+| 이준학   | GPT API, LangChain 을 활용한 금융 보고서 LLM모델 설계 및 실험, FAISS  |
 | 신석준   | GPT API, LangChain 을 활용한 금융 보고서 LLM모델 설계 및 실험, FAISS  |
 
 
